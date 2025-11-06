@@ -1,0 +1,316 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "DashboardService",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Dashboard/agents-sales": {
+      "post": {
+        "tags": [
+          "Dashboard"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetAgentsSalesQuery"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetAgentsSalesQuery"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetAgentsSalesQuery"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetAgentsSalesQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAgentsSalesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAgentsSalesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAgentsSalesResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Dashboard/total-sales": {
+      "post": {
+        "tags": [
+          "Dashboard"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetTotalSalesQuery"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetTotalSalesQuery"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetTotalSalesQuery"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetTotalSalesQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTotalSalesResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTotalSalesResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTotalSalesResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Dashboard/sales-trends": {
+      "post": {
+        "tags": [
+          "Dashboard"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetSalesTrendsQuery"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetSalesTrendsQuery"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetSalesTrendsQuery"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetSalesTrendsQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSalesTrendsResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSalesTrendsResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSalesTrendsResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GetAgentsSalesQuery": {
+        "type": "object",
+        "properties": {
+          "agentLogin": {
+            "type": "string",
+            "nullable": true
+          },
+          "productCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesDateFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "salesDateTo": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetAgentsSalesResult": {
+        "type": "object",
+        "properties": {
+          "perAgentTotal": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/SalesDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetSalesTrendsQuery": {
+        "type": "object",
+        "properties": {
+          "productCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesDateFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "salesDateTo": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/TimeUnit"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetSalesTrendsResult": {
+        "type": "object",
+        "properties": {
+          "periodsSales": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PeriodSaleDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetTotalSalesQuery": {
+        "type": "object",
+        "properties": {
+          "productCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesDateFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "salesDateTo": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetTotalSalesResult": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "$ref": "#/components/schemas/SalesDto"
+          },
+          "perProductTotal": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/SalesDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PeriodSaleDto": {
+        "type": "object",
+        "properties": {
+          "periodDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "period": {
+            "type": "string",
+            "nullable": true
+          },
+          "sales": {
+            "$ref": "#/components/schemas/SalesDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SalesDto": {
+        "type": "object",
+        "properties": {
+          "policiesCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "premiumAmount": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TimeUnit": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      }
+    }
+  }
+}
